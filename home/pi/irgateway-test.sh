@@ -1,10 +1,10 @@
 #!/bin/bash
 
 SERVER=m21.cloudmqtt.com
-PORT=10185
-KULL=emre
-PASS=123456
-TITLE1="inceir/sat"
+PORT=XXXX
+KULL=XXXX
+PASS=XXXX
+TITLE1=XXXX
 
 LOG_PREFIX=$(basename $0 .sh)
 
