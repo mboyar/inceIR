@@ -1,10 +1,10 @@
 #!/bin/bash
 
 SERVER=m21.cloudmqtt.com
-PORT=XXXX
-KULL=XXXX
-PASS=XXXX
-TITLE1=XXXX
+PORT=xxxx
+KULL=xxxx
+PASS=xxxx
+TITLE1=xxxx
 
 LOG_PREFIX=$(basename $0 .sh)
 
@@ -26,6 +26,7 @@ do
 done
 ) &
 pidIrw=$!; echo $pidIrw > /tmp/$LOG_PREFIX-irw.pid
+
 
 #sub_process_2
 (
@@ -50,3 +51,12 @@ done
 )&
 pidMosq1=$!; echo $pidMosq1 >/tmp/$LOG_PREFIX-mosq1.pid
 
+
+#sub_process_3
+(
+stdbuf -oL python /home/pi/bin/serial-reader.py | while read temp;
+do
+	mosquitto_pub -h $SERVER -p $PORT -t temp/analog -u $KULL -P $PASS -m $temp
+
+done
+)&
